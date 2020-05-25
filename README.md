@@ -49,5 +49,5 @@ UserName {fullName = "srid", lastName = "r"}
 
 ## Adding libraries
 
-Add your library to the `haskell-playground.cabal` file under the `build-depends` section, and then restart the above commands. 
+Add the name of your library (from [Hackage](http://hackage.haskell.org/)) to the `haskell-playground.cabal` file under the `build-depends` section, and then restart the above commands. 
 
