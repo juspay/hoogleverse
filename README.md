@@ -17,7 +17,7 @@ Now try changing `Main.hs` and it and should the app automatically. Compile erro
 Launch GHCi,
 
 ```sh
-nix-shell --run "cabal new-repl"
+nix-shell --run "cabal repl"
 ```
 
 Inside the repl, import your Main.hs module:
