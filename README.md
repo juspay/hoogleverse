@@ -51,3 +51,6 @@ UserName {fullName = "srid", lastName = "r"}
 
 Add the name of your library (from [Hackage](http://hackage.haskell.org/)) to the `haskell-playground.cabal` file under the `build-depends` section, and then restart the above commands. 
 
+## Further reading
+
+* [Nix recipes for Haskellers](https://www.srid.ca/1948201.html)
