@@ -4,7 +4,7 @@ A very easy to get started environment for playing with Haskell, based on Nix.
 
 ## Getting Started
 
-First, [install Nix](https://nixos.org/nix/), and then directly run the app in "auto-recompilation" mode (thanks to `ghcid`):
+First, [install Nix](https://nixos.org/nix/) (see [here](https://neuron.zettel.page/2011501.html#nix), however, if you are on macOS Catalina), and then directly run the app in "auto-recompilation" mode (thanks to `ghcid`):
 
 ```sh 
 nix-shell --run "ghcid -T :main"
