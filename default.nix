@@ -44,8 +44,12 @@ in
       beam-mysql = dontCheck super.beam-mysql;
 
       # Beam requires these
-      haskell-src-exts = doJailbreak super.haskell-src-exts; # self.callHackage "haskell-src-exts" "1.21.1" {};
-      #haskell-src-meta = dontCheck super.haskell-src-meta;
+      haskell-src-exts = self.callHackage "haskell-src-exts" "1.21.1" {};
+      haskell-src-meta = dontCheck super.haskell-src-meta;
+
+      # Latest hoogle requires a version of haskell-src-exts that conflicts with beam.
+      # Pick the version that plays along nice with beam's requirement.
+      hoogle = self.callHackage "hoogle" "5.0.17.11" {};
     };
     modifier = drv:
       pkgs.haskell.lib.addBuildTools drv (with pkgs.haskellPackages;
