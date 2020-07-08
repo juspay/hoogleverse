@@ -15,11 +15,12 @@ let
       rev = "c858846e322ad28fe53fb6c56006bb1a52b20683";
       sha256 = "sha256:1xffrdbfs2d61qwlchqj4pc5yczkipbghhr5566p2bn1163mmyqw";
     };
+    # This fork is actively maintained compared to upstream.
     beam-mysql = pkgs.fetchFromGitHub {
-      owner = "tathougies";
+      owner = "juspay";
       repo = "beam-mysql";
-      rev = "2c561b486acf80c7847f48667f1a7d9222f2b35a";
-      sha256 = "sha256:1b9rnd0dxc33dk0c71kiivn69lzr3gk5d01p98d5lmi7yvsqsd0m";
+      rev = "5d17599e02f30c220b679439ee0c1025e3086250";
+      sha256 = "sha256:09n42cg99cn3kj00ns1c3ds690w0y59rlliyp32pqd6gbcqq7bxr";
     };
   };
 in 
