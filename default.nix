@@ -44,13 +44,11 @@ in
       beam-mysql = dontCheck super.beam-mysql;
 
       # Beam requires these
-      haskell-src-exts = self.callHackage "haskell-src-exts" "1.21.1" {};
-      haskell-src-meta = dontCheck super.haskell-src-meta;
+      haskell-src-exts = doJailbreak super.haskell-src-exts; # self.callHackage "haskell-src-exts" "1.21.1" {};
+      #haskell-src-meta = dontCheck super.haskell-src-meta;
     };
     modifier = drv:
       pkgs.haskell.lib.addBuildTools drv (with pkgs.haskellPackages;
         [ cabal-install
-          ghcid
-          hpack
         ]);
   }
