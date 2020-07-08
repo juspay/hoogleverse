@@ -47,6 +47,8 @@ in
       haskell-src-exts = self.callHackage "haskell-src-exts" "1.21.1" {};
       haskell-src-meta = dontCheck super.haskell-src-meta;
       hashable = doJailbreak (self.callHackage "hashable" "1.2.7.0" {});
+      # Override rebase's hashablar version lock
+      rebase = doJailbreak super.rebase;
 
       # Latest hoogle requires a version of haskell-src-exts that conflicts with beam.
       # Pick the version that plays along nice with beam's requirement.
