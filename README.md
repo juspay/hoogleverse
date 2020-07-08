@@ -6,3 +6,9 @@ Run dedicated Hoogle server with a custom list of packages.
 
 Modify the build-depends of `hoogleverse.cabal`.
 
+## Running hoogle server
+
+```sh
+bin/hoogle -p 8080
+```
+
