@@ -25,6 +25,7 @@ executable hoogleverse-main
     mtl,
     tagged,
     containers,
+    streamly,
     beam-core,
     beam-postgres,
     beam-mysql,
