@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-set -ex
-
-nix-shell --pure --run "hoogle server --local $*"

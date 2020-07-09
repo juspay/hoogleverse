@@ -23,26 +23,17 @@ let
       sha256 = "sha256:09n42cg99cn3kj00ns1c3ds690w0y59rlliyp32pqd6gbcqq7bxr";
     };
   };
-in 
-  compiler.developPackage {
-    root = ./.;
-    source-overrides = {
-      # Beam is broken in nixpkgs; https://github.com/NixOS/nixpkgs/issues/83380
-      beam-core = src.beam + /beam-core;
-      beam-migrate = src.beam + /beam-migrate;
-      beam-sqlite = src.beam + /beam-sqlite;
-      beam-postgres = src.beam + /beam-postgres;
-      beam-mysql = src.beam-mysql;
-    };
+  hoogle = (compiler.override {
     overrides = self: super: with pkgs.haskell.lib; {
       ghc = super.ghc // { withPackages = super.ghc.withHoogle; };
       ghcWithPackages = self.ghc.withPackages;
       
-      beam-core = dontCheck super.beam-core;
-      beam-migrate = dontCheck super.beam-migrate;
-      beam-sqlite = dontCheck super.beam-sqlite;
-      beam-postgres = dontCheck super.beam-postgres;
-      beam-mysql = dontCheck super.beam-mysql;
+      # Beam is broken in nixpkgs; https://github.com/NixOS/nixpkgs/issues/83380
+      beam-core = dontCheck (self.callCabal2nix "beam-core" (src.beam + /beam-core) {});
+      beam-migrate = dontCheck (self.callCabal2nix "beam-migrate" (src.beam + /beam-migrate) {});
+      beam-postgres = dontCheck (self.callCabal2nix "beam-postgres" (src.beam + /beam-postgres) {});
+      beam-sqlite = dontCheck (self.callCabal2nix "beam-sqlite" (src.beam + /beam-sqlite) {});
+      beam-mysql = dontCheck (self.callCabal2nix "beam-sqlite" src.beam-mysql {});
 
       # Beam requires these
       haskell-src-exts = self.callHackage "haskell-src-exts" "1.21.1" {};
@@ -54,9 +45,30 @@ in
       # Latest hoogle requires a version of haskell-src-exts that conflicts with beam.
       # Pick the version that plays along nice with beam's requirement.
       hoogle = self.callHackage "hoogle" "5.0.17.11" {};
+
     };
-    modifier = drv:
-      pkgs.haskell.lib.addBuildTools drv (with pkgs.haskellPackages;
-        [ cabal-install
-        ]);
-  }
+  }).ghcWithPackages (p: with p; [
+    beam-core 
+    beam-postgres
+    beam-mysql
+    beam-migrate
+    streamly
+    text
+    aeson
+    warp
+    http-client 
+    lens
+    semigroups
+    monad-logger
+    optparse-applicative
+    profunctors
+    bifunctors
+    exceptions
+    file-embed
+    mtl
+    tagged
+    containers
+    shower
+  ]);
+in 
+  pkgs.writeShellScriptBin "hoogleverse" "${hoogle}/bin/hoogle server --local $*"

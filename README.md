@@ -4,11 +4,11 @@ Run dedicated Hoogle server with a custom list of packages.
 
 ## Adding / removing Haskell packages
 
-Modify the build-depends of `hoogleverse.cabal`.
+Modify the list at the end of default.nix. Then run `nix-build` to test.
 
 ## Running hoogle server
 
 ```sh
-bin/hoogle -p 8080
+$(nix-build)/bin/hoogleverse -p 8080
 ```
 
